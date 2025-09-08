@@ -11,7 +11,7 @@ function HeroImage() {
     setPlay(true);
   }, []);
 
-  const text = "Woodland  Camo".split(""); 
+  const text = "Woodland Camo".split(""); 
   const trail = useTrail(text.length, {
     from: { opacity: 0, y: 50 },
     to: { opacity: play ? 1 : 0, y: play ? 0 : 50 },
