@@ -1,11 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}", // Adjusted to src-based structure
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "camo-base": "#475a31",
+        "camo-light": "#8a9d6a",
+      },
+    },
   },
   plugins: [],
-}
+};
