@@ -8,7 +8,7 @@ function Sustainability() {
   return (
     <div className="relative z-10 bg-white min-h-screen font-bold leading-1">
       <ProductDescription /> 
-       <OurPillars />
+       {/* <OurPillars /> */}
       {/* <DoingBusiness />  */}
     </div>
   );
