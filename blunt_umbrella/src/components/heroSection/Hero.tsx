@@ -1,57 +1,50 @@
 "use client";
-import { animated, useTrail, SpringValue } from "@react-spring/web";
+
+import { animated, useSpring } from "@react-spring/web";
 import React, { useEffect, useState } from "react";
-import styles from "./Hero.module.css"; 
 
 function HeroImage() {
-  const [play, setPlay] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
 
-  useEffect(() => {
-   
-    setPlay(true);
-  }, []);
 
-  const text = "Woodland Camo".split(""); 
-  const trail = useTrail(text.length, {
-    from: { opacity: 0, y: 50 },
-    to: { opacity: play ? 1 : 0, y: play ? 0 : 50 },
-    config: { tension: 200, friction: 18 },
-    reverse: false,
+  const imageSpring = useSpring({
+    transform: `translateY(${Math.min(scrollY * -0.2, 0)}px)`,
+    config: { mass: 1, tension: 120, friction: 30 },
   });
 
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const product = {
+    image:
+      "https://bluntumbrellas.com/cdn/shop/files/Woodland_Camo_Classic_Product_hero.png",
+    title: "Woodland Camo Classic",
+  };
+
   return (
-    <div className={styles.heroContainer}>
-      <div className={styles.overlay}>
-        <h1 className={styles.title}>
-          {trail.map(
-            (
-              style: { opacity: SpringValue<number>; y: SpringValue<number> },
-              index: number
-            ) => (
-              <animated.span
-                key={index}
-                style={{
-                  opacity: style.opacity,
-                  transform: style.y.to((y: number) => `translateY(${y}px)`),
-                  display: "inline-block",
-                }}
-              >
-                {text[index] === " " ? "\u00A0" : text[index]}
-              </animated.span>
-            )
-          )}
+    <div className="relative w-full bg-gradient-to-b from-[#324621] via-[#495c32] to-[#697e4b]">
+     
+      <div className="sticky top-0 flex flex-col items-center justify-center min-h-screen pt-4 z-10">
+       
+        <h1 className="text-white font-blunt fontFamily-'Blunt', sans-serif font-[530] text-center mb-0
+                       tracking-wide leading-[155px] pt-28 text-[170px]">
+          Woodland Camo
         </h1>
-        <div className={styles.leftContent}>
-          <p className={styles.description}>
-            A universal print, camouflage has transcended its stealth roots to
-            become a classic emblem of style. The iconic blend of greens and
-            blacks seamlessly integrates into everyday fashion.
-          </p>
-          <a href="/products/woodland-camo-classic" className={styles.cta}>
-            $114.00
-          </a>
-        </div>
+
+      
+        <animated.img
+          src={product.image}
+          alt={product.title}
+          style={imageSpring}
+          className="w-[1100px] sm:w-[1200px] md:w-[1300px] object-contain mx-auto -mt-18 pt-1 pr-5"
+        />
       </div>
+
+      
+      <div className="h-[50vh]"></div>
     </div>
   );
 }
