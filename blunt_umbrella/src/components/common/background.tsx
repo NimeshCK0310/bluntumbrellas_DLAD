@@ -4,6 +4,7 @@ import ProductDescription from "../ProductDescription";
 // import DoingBusiness from "../DoingBusiness";
 import Modular from "../Modular";
 import Radial from "../Radial"
+import CollaborationSection from "../CollaborationSection";
 
 function Sustainability() {
   
@@ -12,6 +13,7 @@ function Sustainability() {
       <ProductDescription /> 
       <Modular />
       <Radial />
+      {/* <CollaborationSection /> */}
        {/* <OurPillars /> */}
       {/* <DoingBusiness />  */}
     </div>
