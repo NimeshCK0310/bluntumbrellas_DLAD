@@ -4,7 +4,7 @@ import React from "react";
 function ProductDescription() {
   return (
     <div className="bg-[#f5f5f5] z-10">
-      <div className="mx-[20px] pt-[30px] pb-[20px]">
+      <div className="mx-[20px] pt-[20px] pb-[10px]">
         {/* Heading */}
         <h3 className="lg:text-[64px] lg:leading-[67px] font-semibold mb-[70px] text-5xl">
           Built to last
@@ -13,19 +13,19 @@ function ProductDescription() {
         {/* Two-column layout */}
         <div className="flex flex-col lg:flex-row items-start justify-between gap-16">
           {/* Left side - Image */}
-          <div className="flex-1 flex justify-start pt-[40px]">
+          <div className="flex-1 flex justify-start">
             <Image
               src="/images/PDP_Intro__Woodland_Camp_3.webp"
               alt="Sustainability"
               width={300}
-              height={100}
+              height={120}
               className="rounded-2xl object-cover"
               priority
             />
           </div>
 
-          {/* Right side - Scrollable Text (Scrollbar hidden) */}
-          <div className="flex-[1.4] max-w-[600px] h-[700px] overflow-y-auto pr-20 text-left self-start scrollbar-hide">
+          {/* Right side - Scrollable Text (aligned to top, scrollbar hidden) */}
+          <div className="flex-[1.4] max-w-[600px] h-[450px] overflow-y-auto pr-20 text-left scrollbar-hide mt-0 pt-0">
             <p className="text-base leading-[26px] font-normal mb-4">
               When rain clouds threaten, and you have places to be, carry the
               Classic. Offering full coverage in a refined style, the Classic
