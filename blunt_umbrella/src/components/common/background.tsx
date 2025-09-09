@@ -1,7 +1,7 @@
 import React from "react";
 import ProductDescription from "../ProductDescription";
-import OurPillars from "../OurPillars";
-import DoingBusiness from "../DoingBusiness";
+// import OurPillars from "../OurPillars";
+// import DoingBusiness from "../DoingBusiness";
 
 function Sustainability() {
   

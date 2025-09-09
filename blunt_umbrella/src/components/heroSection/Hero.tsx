@@ -39,7 +39,7 @@ function HeroImage() {
           src={product.image}
           alt={product.title}
           style={imageSpring}
-          className="w-[1100px] sm:w-[1200px] md:w-[1300px] object-contain mx-auto -mt-18 pt-1 pr-5"
+          className="w-[1100px] sm:w-[1200px] md:w-[1300px] object-contain mx-auto -mt-18 pt-1 pr-0"
         />
       </div>
 

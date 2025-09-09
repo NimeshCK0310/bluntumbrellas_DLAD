@@ -30,10 +30,10 @@ function ProductDescription() {
               When rain clouds threaten, and you have places to be, carry the
               Classic. Offering full coverage in a refined style, the Classic
               protects against wind, rain and shine, and tucks comfortably under
-              your arm when there's a break in the weather.
+              your arm when there&apos;s a break in the weather.
             </p>
             <p className="text-base leading-[26px] font-normal mb-4">
-              The Classic’s high-tensioned canopy provides full comfort and
+              The Classic&apos;s high-tensioned canopy provides full comfort and
               shelter, even during those all day downpours.
             </p>
             <p className="text-base leading-[26px] font-normal mb-4">
