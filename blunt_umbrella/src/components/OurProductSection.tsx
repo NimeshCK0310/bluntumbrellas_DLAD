@@ -1,17 +1,12 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { motion } from "framer-motion";
 
 const OurProductsSection = () => {
-  useEffect(() => {
-    // Swiper auto init
-  }, []);
-
   const products = [
     {
       name: "Metro",
@@ -48,18 +43,16 @@ const OurProductsSection = () => {
   return (
     <section className="py-[80px] bg-white font-[Blunt,sans-serif]">
       <div className="w-full">
-        {/* Header */}
         <div className="flex justify-between items-center mb-12 px-8">
           <h4 className="text-4xl font-bold">Our Products</h4>
           <a
             href="/collections/core-range"
-            className="px-6 py-3 border border-black text-black hover:bg-black hover:text-white transition text-lg"
+            className="px-3 py-2 border border-zinc-200 text-black hover:bg-black hover:text-white transition text-sm"
           >
             Shop Collection
           </a>
         </div>
 
-        {/* Products Carousel */}
         <Swiper
           modules={[Navigation]}
           spaceBetween={24}
@@ -74,11 +67,7 @@ const OurProductsSection = () => {
         >
           {products.map((product, index) => (
             <SwiperSlide key={index} className="relative">
-              <motion.div
-                className="bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md flex flex-col justify-between h-[560px] w-full overflow-hidden transition-all duration-300"
-                whileHover={{ scale: 1.01 }}
-              >
-                {/* Top Info */}
+              <div className="bg-[#f5f5f5] border border-gray-100 rounded-2xl shadow-sm flex flex-col justify-between h-[560px] w-full overflow-hidden group transition-all duration-500">
                 <div className="flex justify-between items-start p-6 pt-5">
                   <div>
                     <h5 className="text-2xl font-semibold">{product.name}</h5>
@@ -90,27 +79,25 @@ const OurProductsSection = () => {
                   ></span>
                 </div>
 
-                {/* Image */}
-                <div className="relative flex justify-center items-center px-8 py-6 h-[400px] group">
+                <div className="relative flex justify-center items-center px-8 py-6 h-[400px] bg-[#f5f5f5] group">
                   <img
                     src={product.img}
                     alt={product.name}
-                    className="absolute max-h-[480px] object-contain transition-opacity duration-300 group-hover:opacity-0"
+                    className="absolute max-h-[520px] object-contain transition-opacity duration-500 group-hover:opacity-0"
                   />
                   <img
                     src={product.imgHover}
                     alt={`${product.name} Hover`}
-                    className="absolute max-h-[480px] object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    className="absolute max-h-[520px] object-contain opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                   />
                 </div>
 
-                {/* Add to Bag (always visible like screenshot) */}
-                <div className="border-t border-gray-200 p-5 bg-[#fafafa] text-center">
-                  <button className="text-lg font-medium text-[#1a1a1a] hover:underline">
-                    Add to Bag
+                <div className="flex justify-center pb-6 bg-[#f5f5f5]">
+                  <button className="bg-white text-sm font-medium text-[#1a1a1a] w-[520px] h-[35px] rounded-lg transition-all duration-500 group-hover:bg-black group-hover:text-white">
+                    Add the Bag
                   </button>
                 </div>
-              </motion.div>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
