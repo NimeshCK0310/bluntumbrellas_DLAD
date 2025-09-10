@@ -6,6 +6,7 @@ import Modular from "../Modular";
 import Radial from "../Radial"
 import CollaborationSection from "../CollaborationSection";
 import OurProductSection from "../OurProductSection"
+import BottomSection from "../BottomSection"
 
 function Sustainability() {
   
@@ -16,6 +17,7 @@ function Sustainability() {
       <Radial />
       <CollaborationSection />
     <OurProductSection />
+    <BottomSection />
        {/* <OurPillars /> */}
       {/* <DoingBusiness />  */}
     </div>
