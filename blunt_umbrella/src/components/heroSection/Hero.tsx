@@ -26,9 +26,11 @@ function HeroImage() {
   return (
     <div className="relative w-full bg-gradient-to-b from-[#324621] via-[#495c32] to-[#697e4b]">
       {/* Hero content */}
-      <div className="sticky top-0 flex flex-col items-center justify-center min-h-screen pt-4 z-10">
-        <h1 className="text-white font-blunt font-[530] text-center mb-0
-                       tracking-wide leading-[155px] pt-28 text-[170px]">
+      <div className="sticky top-0 flex flex-col items-center justify-center h-[50vh] pt-148 z-10">
+        <h1
+          className="text-white font-quicksand font-[600] text-center mb-0 pt-28 
+                 tracking-widest leading-[155px] text-[170px] sm:text-[120px] md:text-[110px] lg:text-[170px]"
+        >
           Woodland Camo
         </h1>
 
@@ -36,7 +38,7 @@ function HeroImage() {
           src={product.image}
           alt={product.title}
           style={imageSpring}
-          className="w-[1100px] sm:w-[1200px] md:w-[1300px] object-contain mx-auto -mt-18 pt-1 pr-0"
+          className="w-[1100px] sm:w-[1200px] md:w-[1300px] object-contain mx-auto -mt-18 pt-1 pr-0 "
         />
       </div>
 
