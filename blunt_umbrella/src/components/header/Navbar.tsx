@@ -17,12 +17,12 @@ function Navbar({ isDark }: { isDark: boolean }) {
           isOpen || isFirstHovered ? "bg-white" : "bg-transparent"
         } ${isDark ? "text-black bg-white" : "text-white"}`}
       >
+        {/* Left: Hamburger menu + nav links */}
         <div className="flex items-center">
           <button
             className="md:hidden mr-4"
             onClick={() => setIsOpen(!isOpen)}
             aria-label={isOpen ? "Close menu" : "Open menu"}
-            // aria-expanded={!!isOpen} // Explicitly convert to boolean
           >
             {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
@@ -66,17 +66,25 @@ function Navbar({ isDark }: { isDark: boolean }) {
             ))}
           </ul>
         </div>
-        <Image
-          src="/images/logo.svg"
-          alt="Blunt Logo"
-          width={100}
-          height={50}
-          className={`${isDark ? "" : "invert"}`}
-        />
+
+        {/* Center: Logo */}
+        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <Image
+            src="/images/logo.svg"
+            alt="Blunt Logo"
+            width={100}
+            height={50}
+            className={`${isDark ? "" : "invert"}`}
+          />
+        </div>
+
+        {/* Right: icons and Care & Support */}
         <div className="flex items-center space-x-8">
           <div className="hidden md:flex items-center space-x-3 relative group">
             <div
-              className={`${!isOpen && isFirstHovered ? "invert" : ""} cursor-pointer`}
+              className={`${
+                !isOpen && isFirstHovered ? "invert" : ""
+              } cursor-pointer`}
             >
               Care & Support
             </div>
@@ -138,27 +146,14 @@ function Navbar({ isDark }: { isDark: boolean }) {
             </div>
           </div>
           <div className={`flex space-x-6 ${isDark ? "" : "invert"}`}>
-            <Image
-              src="/images/search.svg"
-              alt="Search"
-              width={20}
-              height={20}
-            />
-            <Image
-              src="/images/profile.svg"
-              alt="Profile"
-              width={20}
-              height={20}
-            />
-            <Image
-              src="/images/cart.svg"
-              alt="Cart"
-              width={20}
-              height={20}
-            />
+            <Image src="/images/search.svg" alt="Search" width={20} height={20} />
+            <Image src="/images/profile.svg" alt="Profile" width={20} height={20} />
+            <Image src="/images/cart.svg" alt="Cart" width={20} height={20} />
           </div>
         </div>
       </nav>
+
+      {/* Mobile menu */}
       {isOpen && (
         <div className="absolute top-0 left-0 w-full h-50% bg-primary bg-opacity-95 text-secondary flex flex-col items-start px-6 py-8 space-y-8">
           <button

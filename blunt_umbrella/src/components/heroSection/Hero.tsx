@@ -28,8 +28,8 @@ function HeroImage() {
       {/* Hero content */}
       <div className="sticky top-0 flex flex-col items-center justify-center h-[50vh] pt-148 z-10">
         <h1
-          className="text-white font-quicksand font-[600] text-center mb-0 pt-28 
-                 tracking-widest leading-[155px] text-[170px] sm:text-[120px] md:text-[110px] lg:text-[170px]"
+          className="text-white font-quicksand font-[650] text-center mb-0 pt-28 
+                 tracking-widest leading-[155px] text-[180px] sm:text-[140px] md:text-[130px] lg:text-[170px]"
         >
           Woodland Camo
         </h1>
