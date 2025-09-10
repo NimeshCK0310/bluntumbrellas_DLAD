@@ -2,23 +2,6 @@
 
 import React from "react";
 
-// Component interfaces for TypeScript
-interface SwiperProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-interface SwiperSlideProps {
-  children: React.ReactNode;
-}
-
-// Mock Swiper components for demo purposes
-const Swiper: React.FC<SwiperProps> = ({ children, className = "" }) => (
-  <div className={`relative ${className}`}>{children}</div>
-);
-
-const SwiperSlide: React.FC<SwiperSlideProps> = ({ children }) => <div>{children}</div>;
-
 interface CollaborationItem {
   title: string;
   subtitle?: string;
@@ -113,11 +96,6 @@ const collaborations: CollaborationItem[] = [
   }
 ];
 
-// CSS styles as a constant to avoid inline styles
-const clipPathStyle = {
-  clipPath: "polygon(100% 0%, 45% 0%, 65% 25%, 79% 30%, 74% 45%, 88% 55%, 93% 70%, 78% 98%, 0% 98%, 0% 100%, 100% 100%)"
-};
-
 export default function CollaborationSection() {
   const [currentSlide, setCurrentSlide] = React.useState(0);
 
@@ -136,122 +114,187 @@ export default function CollaborationSection() {
   const currentItem = collaborations[currentSlide];
 
   return (
-    <div className="w-full overflow-hidden">
-      <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[600px] lg:min-h-[840px]">
-        {/* Left side: Image with organic shape */}
-        <div className="relative overflow-hidden order-2 lg:order-1">
-          {/* Image with custom clip path */}
+    <div className="w-full overflow-hidden relative">
+      {/* Container with proper aspect ratio */}
+      <div className="relative w-full h-[600px] lg:h-[700px] xl:h-[800px]">
+        
+        {/* Image Section - Left Side */}
+        <div className="absolute inset-0 w-full lg:w-1/2">
           <div 
-            className="w-full h-full bg-cover bg-center transition-all duration-700 ease-in-out"
+            className="w-full h-full bg-cover bg-center transition-all duration-700 ease-in-out relative"
             style={{
               backgroundImage: `url(${currentItem.image})`,
-              ...clipPathStyle
             }}
           >
-            {/* Gradient overlay */}
-            <div className="w-full h-full bg-gradient-to-r from-black/10 via-transparent to-black/20"></div>
-          </div>
+            {/* Curved SVG Mask Overlay */}
+            <div className="absolute inset-0">
+              <svg 
+                className="absolute inset-0 w-full h-full" 
+                viewBox="0 0 100 100" 
+                preserveAspectRatio="none"
+              >
+                <defs>
+                  <mask id="curve-mask">
+                    <rect width="100" height="100" fill="white"/>
+                    <path 
+                      d="M 85 0 Q 75 20 80 40 Q 85 60 75 80 Q 70 90 65 100 L 100 100 L 100 0 Z" 
+                      fill="black"
+                    />
+                  </mask>
+                </defs>
+                <rect 
+                  width="100" 
+                  height="100" 
+                  fill={`url(#image-${currentSlide})`} 
+                  mask="url(#curve-mask)"
+                />
+                <defs>
+                  <pattern 
+                    id={`image-${currentSlide}`} 
+                    patternUnits="userSpaceOnUse" 
+                    width="100" 
+                    height="100"
+                  >
+                    <image 
+                      href={currentItem.image} 
+                      x="0" 
+                      y="0" 
+                      width="100" 
+                      height="100" 
+                      preserveAspectRatio="xMidYMid slice"
+                    />
+                  </pattern>
+                </defs>
+              </svg>
+            </div>
 
-          {/* Image navigation dots */}
-          <div className="absolute bottom-6 left-6 flex gap-2 z-10">
-            {collaborations.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => goToSlide(idx)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  idx === currentSlide ? 'bg-white scale-110' : 'bg-white/50 hover:bg-white/80'
-                }`}
-                aria-label={`Go to collaboration ${idx + 1}: ${collaborations[idx].title}`}
-                title={`${collaborations[idx].title}`}
-              />
-            ))}
+            {/* Alternative approach using clip-path for better browser support */}
+            <div 
+              className="absolute inset-0 w-full h-full bg-cover bg-center transition-all duration-700 ease-in-out lg:block hidden"
+              style={{
+                backgroundImage: `url(${currentItem.image})`,
+                clipPath: "polygon(0% 0%, 85% 0%, 75% 20%, 80% 40%, 85% 60%, 75% 80%, 70% 90%, 65% 100%, 0% 100%)"
+              }}
+            />
+
+            {/* Mobile version without clip-path */}
+            <div 
+              className="absolute inset-0 w-full h-full bg-cover bg-center transition-all duration-700 ease-in-out lg:hidden"
+              style={{
+                backgroundImage: `url(${currentItem.image})`,
+              }}
+            />
+
+            {/* Subtle gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black/5"></div>
           </div>
         </div>
 
-        {/* Right side: Content with dynamic background */}
-        <div className={`flex items-center justify-center p-8 lg:p-16 transition-all duration-700 ease-in-out ${currentItem.backgroundColor} order-1 lg:order-2`}>
-          <div className="max-w-lg">
-            <div className={`transition-all duration-500 ${currentItem.textColor}`}>
-              {/* Title */}
-              <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 leading-tight">
-                {currentItem.title}
-              </h2>
-              
-              {/* Subtitle */}
-              {currentItem.subtitle && (
-                <h3 className="text-xl lg:text-2xl font-semibold mb-6 opacity-90">
-                  {currentItem.subtitle}
-                </h3>
-              )}
-              
-              {/* Description */}
-              <p className="text-base lg:text-lg mb-8 leading-relaxed opacity-95 font-light">
-                {currentItem.text}
-              </p>
-              
-              {/* CTA Button */}
-              <div className="mb-8">
-                <a
-                  href={currentItem.buttonLink}
-                  className={`inline-block px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
-                    currentItem.textColor === 'text-white' 
-                      ? 'bg-white text-black hover:bg-gray-100' 
-                      : 'bg-black text-white hover:bg-gray-800'
-                  }`}
-                >
-                  {currentItem.buttonText}
-                </a>
-              </div>
-            </div>
+        {/* Text Section - Right Side */}
+        <div className={`absolute inset-0 lg:left-1/2 transition-all duration-700 ease-in-out ${currentItem.backgroundColor}`}>
+          {/* Curved white overlay for the organic separation */}
+          <div className="absolute left-0 top-0 w-20 h-full hidden lg:block">
+            <svg 
+              className="absolute left-0 top-0 w-full h-full" 
+              viewBox="0 0 20 100" 
+              preserveAspectRatio="none"
+            >
+              <path 
+                d="M 0 0 Q 10 20 5 40 Q 0 60 10 80 Q 15 90 20 100 L 20 0 Z" 
+                fill={currentItem.backgroundColor.includes('green-800') ? '#166534' : 
+                      currentItem.backgroundColor.includes('yellow-400') ? '#facc15' :
+                      currentItem.backgroundColor.includes('blue-600') ? '#2563eb' :
+                      currentItem.backgroundColor.includes('pink-500') ? '#ec4899' :
+                      currentItem.backgroundColor.includes('orange-400') ? '#fb923c' :
+                      currentItem.backgroundColor.includes('gray-900') ? '#111827' :
+                      currentItem.backgroundColor.includes('yellow-300') ? '#fde047' :
+                      currentItem.backgroundColor.includes('green-700') ? '#15803d' : '#166534'}
+              />
+            </svg>
+          </div>
 
-            {/* Navigation Controls */}
-            <div className="flex justify-between items-center">
-              <button
-                onClick={prevSlide}
-                className={`p-3 rounded-full transition-all duration-300 hover:scale-110 ${
-                  currentItem.textColor === 'text-white' 
-                    ? 'text-white/70 hover:text-white hover:bg-white/10' 
-                    : 'text-black/70 hover:text-black hover:bg-black/10'
-                }`}
-                aria-label="Previous collaboration"
-                title="Previous collaboration"
-              >
-                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-
-              {/* Slide indicators */}
-              <div className="flex gap-3">
-                {collaborations.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => goToSlide(idx)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      idx === currentSlide 
-                        ? currentItem.textColor === 'text-white' ? 'bg-white scale-125' : 'bg-black scale-125'
-                        : currentItem.textColor === 'text-white' ? 'bg-white/30 hover:bg-white/60' : 'bg-black/30 hover:bg-black/60'
+          {/* Content Container */}
+          <div className="h-full flex items-center justify-center lg:justify-start p-8 lg:p-16 lg:pl-24">
+            <div className="max-w-lg lg:max-w-xl">
+              <div className={`transition-all duration-500 ${currentItem.textColor}`}>
+                {/* Title */}
+                <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 lg:mb-6 leading-tight">
+                  {currentItem.title}
+                </h2>
+                
+                {/* Subtitle */}
+                {currentItem.subtitle && (
+                  <h3 className="text-xl lg:text-2xl xl:text-3xl font-light mb-6 lg:mb-8 opacity-90">
+                    {currentItem.subtitle}
+                  </h3>
+                )}
+                
+                {/* Description */}
+                <p className="text-base lg:text-lg xl:text-xl mb-8 lg:mb-12 leading-relaxed opacity-95 font-light max-w-md">
+                  {currentItem.text}
+                </p>
+                
+                {/* CTA Button */}
+                <div className="mb-8 lg:mb-12">
+                  <a
+                    href={currentItem.buttonLink}
+                    className={`inline-block px-8 py-4 lg:px-10 lg:py-5 rounded-full font-semibold text-base lg:text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg ${
+                      currentItem.textColor === 'text-white' 
+                        ? 'bg-white text-black hover:bg-gray-100' 
+                        : 'bg-black text-white hover:bg-gray-800'
                     }`}
-                    aria-label={`Go to collaboration ${idx + 1}: ${collaborations[idx].title}`}
-                    title={`${collaborations[idx].title}`}
-                  />
-                ))}
-              </div>
+                  >
+                    {currentItem.buttonText}
+                  </a>
+                </div>
 
-              <button
-                onClick={nextSlide}
-                className={`p-3 rounded-full transition-all duration-300 hover:scale-110 ${
-                  currentItem.textColor === 'text-white' 
-                    ? 'text-white/70 hover:text-white hover:bg-white/10' 
-                    : 'text-black/70 hover:text-black hover:bg-black/10'
-                }`}
-                aria-label="Next collaboration"
-                title="Next collaboration"
-              >
-                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
+                {/* Navigation Controls */}
+                <div className="flex justify-between items-center max-w-md">
+                  <button
+                    onClick={prevSlide}
+                    className={`p-3 rounded-full transition-all duration-300 hover:scale-110 ${
+                      currentItem.textColor === 'text-white' 
+                        ? 'text-white/70 hover:text-white hover:bg-white/10' 
+                        : 'text-black/70 hover:text-black hover:bg-black/10'
+                    }`}
+                    aria-label="Previous collaboration"
+                  >
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+
+                  {/* Slide indicators */}
+                  <div className="flex gap-3">
+                    {collaborations.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => goToSlide(idx)}
+                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                          idx === currentSlide 
+                            ? currentItem.textColor === 'text-white' ? 'bg-white scale-110' : 'bg-black scale-110'
+                            : currentItem.textColor === 'text-white' ? 'bg-white/40 hover:bg-white/70' : 'bg-black/40 hover:bg-black/70'
+                        }`}
+                        aria-label={`Go to collaboration ${idx + 1}: ${collaborations[idx].title}`}
+                      />
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={nextSlide}
+                    className={`p-3 rounded-full transition-all duration-300 hover:scale-110 ${
+                      currentItem.textColor === 'text-white' 
+                        ? 'text-white/70 hover:text-white hover:bg-white/10' 
+                        : 'text-black/70 hover:text-black hover:bg-black/10'
+                    }`}
+                    aria-label="Next collaboration"
+                  >
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

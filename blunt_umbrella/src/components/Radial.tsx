@@ -16,7 +16,7 @@ const fadeInUp: Variants = {
   },
 };
 
-// 🔹 Updated hook: accept nullable refs
+
 function useDelayedLoop(
   videoRef: React.RefObject<HTMLVideoElement | null>,
   delay = 3000
@@ -37,13 +37,13 @@ function useDelayedLoop(
 }
 
 export default function RadialTensioning() {
-  // Refs for all videos
+
   const video1 = useRef<HTMLVideoElement | null>(null);
   const video2 = useRef<HTMLVideoElement | null>(null);
   const video3 = useRef<HTMLVideoElement | null>(null);
   const video4 = useRef<HTMLVideoElement | null>(null);
 
-  // Apply delayed looping
+ 
   useDelayedLoop(video1, 3000);
   useDelayedLoop(video2, 3000);
   useDelayedLoop(video3, 3000);
@@ -51,7 +51,7 @@ export default function RadialTensioning() {
 
   return (
     <section className="bg-[#f5f5f5] py-20 px-6 lg:px-20">
-      {/* Intro */}
+    
       <motion.div
         initial="hidden"
         whileInView="show"
@@ -69,9 +69,9 @@ export default function RadialTensioning() {
         </p>
       </motion.div>
 
-      {/* Grid */}
+   
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {/* Wide video first */}
+     
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -91,7 +91,7 @@ export default function RadialTensioning() {
           </div>
         </motion.div>
 
-        {/* Frame */}
+    
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -119,7 +119,7 @@ export default function RadialTensioning() {
           </div>
         </motion.div>
 
-        {/* Canopy */}
+  
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -148,7 +148,7 @@ export default function RadialTensioning() {
           </div>
         </motion.div>
 
-        {/* Tip */}
+    
         <motion.div
           initial="hidden"
           whileInView="show"
