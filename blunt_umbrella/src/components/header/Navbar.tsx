@@ -11,7 +11,8 @@ function Navbar({ isDark }: { isDark: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isFirstHovered, setIsFirstHovered] = useState(false);
 
-  const textStyle = "text-[16px] leading-[22px] tracking-[0.02em] font-medium font-blunt";
+  const textStyle =
+    "text-[16px] leading-[22px] tracking-[0.02em] font-medium font-blunt";
 
   return (
     <div className="relative">
@@ -20,7 +21,6 @@ function Navbar({ isDark }: { isDark: boolean }) {
           isOpen || isFirstHovered ? "bg-white" : "bg-transparent"
         } ${isDark ? "text-black bg-white" : "text-white"}`}
       >
-      
         <div className="flex items-center">
           <button
             className="md:hidden mr-4"
@@ -42,7 +42,9 @@ function Navbar({ isDark }: { isDark: boolean }) {
                 }
               >
                 <a
-                  className={`${textStyle} ${!isOpen && isFirstHovered ? "invert" : ""}`}
+                  className={`${textStyle} ${
+                    !isOpen && isFirstHovered ? "invert" : ""
+                  }`}
                   href={link.href}
                 >
                   {link.label}
@@ -81,7 +83,6 @@ function Navbar({ isDark }: { isDark: boolean }) {
           </ul>
         </div>
 
-       
         <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <Image
             src="/images/logo.svg"
@@ -92,19 +93,12 @@ function Navbar({ isDark }: { isDark: boolean }) {
           />
         </div>
 
-       
         <div className="flex items-center space-x-8">
           <div className="hidden md:flex items-center space-x-6 relative group">
-         
-            <div className={`${textStyle} cursor-pointer`}>
-              Care & Support
-            </div>
-           
-            <div className={`${textStyle} cursor-pointer`}>
-              Ship to
-            </div>
+            <div className={`${textStyle} cursor-pointer`}>Care & Support</div>
 
-           
+            <div className={`${textStyle} cursor-pointer`}>Ship to</div>
+
             <div className="absolute top-full left-0 mt-8 w-96 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-30">
               <div className="p-4 flex flex-col space-y-2">
                 {careSupportLinks.map((item, index) => (
@@ -163,10 +157,19 @@ function Navbar({ isDark }: { isDark: boolean }) {
             </div>
           </div>
 
-        
           <div className={`flex space-x-6 ${isDark ? "" : "invert"}`}>
-            <Image src="/images/search.svg" alt="Search" width={20} height={20} />
-            <Image src="/images/profile.svg" alt="Profile" width={20} height={20} />
+            <Image
+              src="/images/search.svg"
+              alt="Search"
+              width={20}
+              height={20}
+            />
+            <Image
+              src="/images/profile.svg"
+              alt="Profile"
+              width={20}
+              height={20}
+            />
             <Image src="/images/cart.svg" alt="Cart" width={20} height={20} />
           </div>
         </div>
@@ -190,7 +193,9 @@ function Navbar({ isDark }: { isDark: boolean }) {
               </li>
             ))}
           </ul>
-          <div className={`flex flex-col items-center space-y-2 w-full text-center ${textStyle}`}>
+          <div
+            className={`flex flex-col items-center space-y-2 w-full text-center ${textStyle}`}
+          >
             <span>Care & Support</span>
             <span>Ship to</span>
           </div>

@@ -18,21 +18,18 @@ function HeroImage() {
     title: "Woodland Camo Classic",
   };
 
- 
   const imageSpring = useSpring({
     transform: `translateY(${Math.min(scrollY * -0.2, 0)}px)`,
-    config: { mass: 1, tension: 80, friction: 20 }, 
+    config: { mass: 1, tension: 80, friction: 20 },
   });
 
-  
   const textSpring = useSpring({
     opacity: scrollY < 50 ? 1 : Math.max(1 - (scrollY - 50) / 150, 0),
-    config: { mass: 1, tension: 120, friction: 28 }, 
+    config: { mass: 1, tension: 120, friction: 28 },
   });
 
   return (
     <div className="relative w-full bg-gradient-to-b from-[#324621] via-[#495c32] to-[#6b7c52]">
-     
       <div className="sticky top-0 flex flex-col items-center justify-center h-[30vh] z-10 pt-158">
         <div className="main-product__heading text-center pt-[90px]">
           <span className="block text-white tracking-widest leading-[140px] text-[180px] sm:text-[140px] md:text-[130px] lg:text-[170px] font-blunt">
@@ -49,7 +46,6 @@ function HeroImage() {
       </div>
 
       <div className="relative w-full mt-1 flex items-center">
-     
         <animated.div
           className="flex flex-col justify-center absolute left-0 pl-8 pr-25 pb-80 z-20"
           style={textSpring}
@@ -64,7 +60,6 @@ function HeroImage() {
           </span>
         </animated.div>
 
-       
         <animated.div
           style={textSpring}
           className="flex flex-col justify-center items-start absolute right-0 pr-4 top-1/2 transform -translate-y-1/2 z-20 text-left pb-70"
@@ -162,7 +157,6 @@ function HeroImage() {
         </animated.div>
       </div>
 
-     
       <div className="h-[30vh]"></div>
     </div>
   );
