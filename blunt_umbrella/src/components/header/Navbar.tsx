@@ -1,4 +1,5 @@
 "use client";
+
 import { careSupportLinks, navbarLinks } from "@/libs/navbarLinks";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -10,6 +11,8 @@ function Navbar({ isDark }: { isDark: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isFirstHovered, setIsFirstHovered] = useState(false);
 
+  const textStyle = "text-[16px] leading-[22px] tracking-[0.02em] font-medium font-blunt";
+
   return (
     <div className="relative">
       <nav
@@ -17,7 +20,7 @@ function Navbar({ isDark }: { isDark: boolean }) {
           isOpen || isFirstHovered ? "bg-white" : "bg-transparent"
         } ${isDark ? "text-black bg-white" : "text-white"}`}
       >
-        {/* Left: Hamburger menu + nav links */}
+      
         <div className="flex items-center">
           <button
             className="md:hidden mr-4"
@@ -39,7 +42,7 @@ function Navbar({ isDark }: { isDark: boolean }) {
                 }
               >
                 <a
-                  className={`${!isOpen && isFirstHovered ? "invert" : ""}`}
+                  className={`${textStyle} ${!isOpen && isFirstHovered ? "invert" : ""}`}
                   href={link.href}
                 >
                   {link.label}
@@ -48,14 +51,25 @@ function Navbar({ isDark }: { isDark: boolean }) {
                   <div className="absolute left-0 top-full w-screen bg-white shadow-lg opacity-0 invisible group-hover/navitem:opacity-100 group-hover/navitem:visible transition-all duration-200">
                     <div className="max-w-screen mx-auto px-6 py-6 grid grid-cols-2 gap-6">
                       <div className="flex flex-col space-y-2">
-                        <h4 className="font-bold text-gray-800">Category 1</h4>
-                        <a href="#" className="text-gray-600 hover:text-black">
+                        <h4 className={`font-bold text-gray-800 ${textStyle}`}>
+                          Category 1
+                        </h4>
+                        <a
+                          href="#"
+                          className={`text-gray-600 hover:text-black ${textStyle}`}
+                        >
                           Option 1
                         </a>
-                        <a href="#" className="text-gray-600 hover:text-black">
+                        <a
+                          href="#"
+                          className={`text-gray-600 hover:text-black ${textStyle}`}
+                        >
                           Option 2
                         </a>
-                        <a href="#" className="text-gray-600 hover:text-black">
+                        <a
+                          href="#"
+                          className={`text-gray-600 hover:text-black ${textStyle}`}
+                        >
                           Option 3
                         </a>
                       </div>
@@ -67,7 +81,7 @@ function Navbar({ isDark }: { isDark: boolean }) {
           </ul>
         </div>
 
-        {/* Center: Logo */}
+       
         <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <Image
             src="/images/logo.svg"
@@ -78,29 +92,32 @@ function Navbar({ isDark }: { isDark: boolean }) {
           />
         </div>
 
-        {/* Right: icons and Care & Support */}
+       
         <div className="flex items-center space-x-8">
-          <div className="hidden md:flex items-center space-x-3 relative group">
-            <div
-              className={`${
-                !isOpen && isFirstHovered ? "invert" : ""
-              } cursor-pointer`}
-            >
+          <div className="hidden md:flex items-center space-x-6 relative group">
+         
+            <div className={`${textStyle} cursor-pointer`}>
               Care & Support
             </div>
+           
+            <div className={`${textStyle} cursor-pointer`}>
+              Ship to
+            </div>
+
+           
             <div className="absolute top-full left-0 mt-8 w-96 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-30">
               <div className="p-4 flex flex-col space-y-2">
                 {careSupportLinks.map((item, index) => (
                   <Link
                     key={index}
                     href={item.href}
-                    className="text-secondary hover:underline-offset-1px"
+                    className={`text-secondary hover:underline-offset-1px ${textStyle}`}
                   >
                     {item.label}
                   </Link>
                 ))}
                 <div>
-                  <div className="text-secondary font-bold my-5">
+                  <div className={`text-secondary font-bold my-5 ${textStyle}`}>
                     Join B Hub
                   </div>
                   <div className="grid lg:grid-cols-3">
@@ -145,6 +162,8 @@ function Navbar({ isDark }: { isDark: boolean }) {
               </div>
             </div>
           </div>
+
+        
           <div className={`flex space-x-6 ${isDark ? "" : "invert"}`}>
             <Image src="/images/search.svg" alt="Search" width={20} height={20} />
             <Image src="/images/profile.svg" alt="Profile" width={20} height={20} />
@@ -153,7 +172,6 @@ function Navbar({ isDark }: { isDark: boolean }) {
         </div>
       </nav>
 
-      {/* Mobile menu */}
       {isOpen && (
         <div className="absolute top-0 left-0 w-full h-50% bg-primary bg-opacity-95 text-secondary flex flex-col items-start px-6 py-8 space-y-8">
           <button
@@ -166,13 +184,13 @@ function Navbar({ isDark }: { isDark: boolean }) {
           <ul className="flex flex-col items-start space-y-1 mt-12">
             {navbarLinks.map((link) => (
               <li key={link.label}>
-                <a href={link.href} className="block text-lg">
+                <a href={link.href} className={`block ${textStyle}`}>
                   {link.label}
                 </a>
               </li>
             ))}
           </ul>
-          <div className="flex flex-col items-center space-y-2 w-full text-center">
+          <div className={`flex flex-col items-center space-y-2 w-full text-center ${textStyle}`}>
             <span>Care & Support</span>
             <span>Ship to</span>
           </div>
