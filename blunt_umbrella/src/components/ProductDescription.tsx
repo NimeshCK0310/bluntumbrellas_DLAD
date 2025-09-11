@@ -5,101 +5,159 @@ import React from "react";
 
 function ProductDescription() {
   return (
-    <div className="relative z-20 -mt-[10vh] bg-[#f5f5f5] rounded-t-3xl shadow-xl">
-      <div className="mx-5 pt-10 pb-10 lg:mx-20 lg:pt-20 lg:pb-20">
-        {/* Heading */}
-        <h3 className="lg:text-[64px] lg:leading-[67px] font-semibold mb-12 text-4xl text-center lg:text-left">
-          Built to last
-        </h3>
+    <div className="relative z-20 bg-white">
+      {/* Outer wrapper */}
+      <div className="w-full py-10 lg:py-20">
+        {/* Full-width grid: left column, vertical separator, right column */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(0,1px)_1fr] gap-12">
+          {/* ================= Left Column ================= */}
+          {/* Sticky images + left edge alignment */}
+          <div className="lg:sticky lg:top-24 self-start lg:pl-20">
+            {/* Mobile heading (visible on small screens only) */}
+            <h3 className="text-[36px] leading-[40px] font-semibold mb-6 lg:hidden">
+              Built to last
+            </h3>
 
-        {/* Two-column layout */}
-        <div className="flex flex-col lg:flex-row items-start justify-between gap-12">
-          {/* Left side - Image */}
-          <div className="flex-1 flex justify-center lg:justify-start">
-            <Image
-              src="/images/PDP_Intro__Woodland_Camp_3.webp"
-              alt="Sustainability"
-              width={400}
-              height={200}
-              className="rounded-2xl object-cover"
-              priority
-            />
+            {/* Desktop heading + image */}
+            <div className="space-y-4 flex flex-col items-start text-left w-full ml-0 pl-0">
+              {/* Desktop heading (hidden on mobile) */}
+              <h3 className="hidden lg:block text-[72px] leading-[67px] font-semibold mb-12">
+                Built to last
+              </h3>
+
+              {/* Product image */}
+              <Image
+                src="https://bluntumbrellas.com/cdn/shop/files/PDP_Intro__Woodland_Camp_3.jpg?v=1731013357&width=700"
+                alt="Woodland Camo Classic"
+                width={450}
+                height={500}
+                priority
+                className="block w-[380px] h-[500px] mb-[30px] object-cover"
+              />
+            </div>
           </div>
 
-          {/* Right side - Scrollable Text */}
-          <div className="flex-[1.4] max-w-[600px] h-[450px] overflow-y-auto pr-8 text-left scrollbar-hide mt-4 lg:mt-0">
-            <p className="text-base leading-[26px] font-normal mb-4">
-              When rain clouds threaten, and you have places to be, carry the Classic. Offering full coverage in a refined style, the Classic protects against wind, rain and shine, and tucks comfortably under your arm when there&apos;s a break in the weather.
-            </p>
-            <p className="text-base leading-[26px] font-normal mb-4">
-              The Classic&apos;s high-tensioned canopy provides full comfort and shelter, even during those all-day downpours.
-            </p>
-            <p className="text-base leading-[26px] font-normal mb-4">
-              Please note, due to the nature of the UV fabric on our Classic UV models, creasing does occur.
-            </p>
-            <p className="text-base leading-[26px] font-normal mb-8">
-              We are updating our tip pocket colors. Questions? Reach out to our customer service team.
-            </p>
+          {/* ================= Vertical Separator ================= */}
+          <div className="hidden lg:block w-px bg-gray-200"></div>
 
-            {/* Use Section */}
-            <div className="mb-8">
-              <h2 className="text-base font-semibold mb-2">Use</h2>
-              <p className="text-sm text-gray-600 mb-4">
-                Ideal for one but can fit another small human (or pet) under.
+          {/* ================= Right Column ================= */}
+          {/* Right column content, aligned to right edge */}
+          <div className="lg:pr-20 flex flex-col space-y-10 text-left">
+            {/* Description section with bottom border */}
+            <div className="leading-relaxed font-medium text-gray-800 space-y-5 border-b pb-10 pl-8 text-xl">
+              <p>
+                When rain clouds threaten, and you have places to be, carry the
+                Classic. Offering full coverage in a refined style, the Classic
+                protects against wind, rain and shine, and tucks comfortably
+                under your arm when there&apos;s a break in the weather.
               </p>
-              <div className="flex gap-6">
-                <Image
-                  src="/images/Classic-new.svg"
-                  alt="Umbrella open"
-                  width={300}
-                  height={200}
-                  className="rounded-lg"
+              <p>
+                The Classic’s high-tensioned canopy provides full comfort and
+                shelter, even during those all day downpours.
+              </p>
+              <p>
+                Please note, due to the nature of the UV fabric on our Classic
+                UV models, creasing does occur.
+              </p>
+              <p>
+                We are in the process of updating our tip pocket colors. If you
+                have any questions with your order and specific color, feel free
+                to reach out to our customer service team.
+              </p>
+            </div>
+
+            {/* Specs list with bottom border */}
+            <ul className="space-y-6 max-w-[700px] mx-auto">
+              {/* Use section */}
+              <li className="p-6 flex flex-col lg:flex-row lg:items-start lg:justify-between lg:gap-x-56">
+                {/* Left column: "Use" heading */}
+                <div className="mb-4 lg:mb-0">
+                  <h6 className="font-semibold mb-2">Use</h6>
+                </div>
+
+                {/* Right column: text + image */}
+                <div className="flex flex-col lg:items-start space-y-4">
+                  <p className="text-sm text-gray-600">
+                    Ideal for one but can fit another small human (or pet)
+                    under.
+                  </p>
+                  <Image
+                    src="https://bluntumbrellas.com/cdn/shop/files/Classic-new.svg?v=1689581177"
+                    alt="Classic Use"
+                    width={250}
+                    height={200}
+                    className="mx-auto lg:mx-0"
+                  />
+                </div>
+              </li>
+
+              {/* Coverage section */}
+              <li className="border border-gray-200 rounded-md p-6">
+                <h6 className="font-semibold mb-2">Coverage</h6>
+                <p className="text-sm text-gray-600">
+                  47.2in <br />
+                  Serious protection for one, just enough for two.
+                </p>
+              </li>
+
+              {/* Specs section */}
+              <li className="border border-gray-200 rounded-md p-6">
+                <h6 className="font-semibold mb-2">Specs</h6>
+                <div className="grid grid-cols-2 gap-y-2 text-sm text-gray-600">
+                  <span className="font-medium">Open Diameter</span>
+                  <span>47.2 in</span>
+
+                  <span className="font-medium">Closed Length</span>
+                  <span>33.1 in</span>
+
+                  <span className="font-medium">Weight</span>
+                  <span>23.3 oz</span>
+                </div>
+              </li>
+            </ul>
+
+            {/* Shipping info with icon and bottom border */}
+            <div className="flex items-start gap-4 border-b pb-10 justify-end text-left bg-neutral-400">
+              <svg
+                width="34"
+                height="30"
+                viewBox="0 0 34 30"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="flex-shrink-0"
+              >
+                <path
+                  d="M32.7165 20.5753H16.4616C14.7734 20.5753 13.3997 19.2016 13.3997 17.5134V3.411C13.3997 2.727 12.8427 2.16806 12.1568 2.16806H7.22294C6.72084 2.16806 6.31348 1.76069 6.31348 1.25859C6.31348 0.756487 6.72084 0.349121 7.22294 0.349121H12.1568C13.845 0.349121 15.2187 1.7228 15.2187 3.411V17.5153C15.2187 18.1993 15.7757 18.7583 16.4616 18.7583H32.7165C33.2186 18.7583 33.6259 19.1656 33.6259 19.6677C33.6259 20.1698 33.2186 20.5753 32.7165 20.5753Z"
+                  fill="#484646"
                 />
-              </div>
-            </div>
-
-            {/* Coverage Section */}
-            <div className="mb-8">
-              <h2 className="text-base font-semibold mb-2">Coverage</h2>
-              <p className="text-sm text-gray-600">
-                47.2in <br /> Serious protection for one, just enough for two.
-              </p>
-            </div>
-
-            {/* Specs Section */}
-            <div className="mb-8">
-              <h2 className="text-base font-semibold mb-2">Specs</h2>
-              <ul className="text-sm text-gray-600 space-y-1">
-                <li><span className="font-medium">Open Diameter:</span> 47.2 in</li>
-                <li><span className="font-medium">Closed Length:</span> 33.1 in</li>
-                <li><span className="font-medium">Weight:</span> 23.3 oz</li>
-              </ul>
-            </div>
-
-            {/* Shipping Info */}
-            <div className="bg-gray-50 border rounded-lg p-4 flex items-center gap-3 mb-8">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 7h18M3 12h18M3 17h18" />
+                <path
+                  d="M9.74244 8.21054H5.24248C4.74037 8.21054 4.33301 7.80317 4.33301 7.30107C4.33301 6.79897 4.74037 6.3916 5.24248 6.3916H9.74244C10.2445 6.3916 10.6519 6.79897 10.6519 7.30107C10.6519 7.80317 10.2445 8.21054 9.74244 8.21054Z"
+                  fill="#484646"
+                />
               </svg>
               <p className="text-sm text-gray-700">
-                Free shipping over $180 in the U.S*. <a href="#" className="underline">See shipping for more info.</a>
+                Free shipping over $180 in the U.S*.{" "}
+                <a
+                  href="/pages/shipping-and-returns-2"
+                  className="underline underline-offset-2"
+                >
+                  See shipping for more info.
+                </a>
               </p>
             </div>
 
-            {/* Illustration Section */}
-            <div className="text-center mb-8">
-              <p className="text-sm text-gray-600 mb-2">47.2in</p>
+            {/* Illustration section with bottom border */}
+            <div className="border-b pb-10 flex justify-end">
               <Image
-                src="/images/Classic_-_Open_-_IN.svg"
-                alt="Umbrella with person illustration"
+                src="https://bluntumbrellas.com/cdn/shop/files/Classic_-_Open_-_IN.svg?v=1689655690"
+                alt="Classic Open Illustration"
                 width={300}
                 height={300}
-                className="mx-auto"
               />
             </div>
 
-            {/* Compare Button */}
-            <div className="text-center">
+            {/* Compare button */}
+            <div className="flex justify-end">
               <button className="bg-black text-white px-6 py-3 rounded-md text-sm font-medium hover:bg-gray-800 transition">
                 Compare with other sizes
               </button>
