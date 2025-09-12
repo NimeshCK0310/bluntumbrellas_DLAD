@@ -193,9 +193,7 @@ export default function Footer() {
                 width={60}
                 height={30}
               />
-              <p className="text-xs text-gray-400 mt-1">
-                Certified Corporation
-              </p>
+              
             </div>
           </div>
         </div>
