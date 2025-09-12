@@ -190,8 +190,8 @@ export default function Footer() {
               <Image
                 src="https://bluntumbrellas.com/cdn/shop/files/Group_a49f590d-01b6-4fc6-870c-ca556f067c29.png?v=1689537902"
                 alt="Certification Logo"
-                width={80}
-                height={40}
+                width={60}
+                height={30}
               />
               <p className="text-xs text-gray-400 mt-1">
                 Certified Corporation
