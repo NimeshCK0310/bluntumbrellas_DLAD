@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface Variant {
   id: number;
@@ -18,6 +18,7 @@ interface VariantBarProps {
 const VariantBar: React.FC<VariantBarProps> = ({ title, variants }) => {
   const [activeVariant, setActiveVariant] = useState<Variant>(variants[0]);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [hideBar, setHideBar] = useState(false);
 
   const toggleDropdown = () => setShowDropdown(!showDropdown);
 
@@ -26,13 +27,37 @@ const VariantBar: React.FC<VariantBarProps> = ({ title, variants }) => {
     setShowDropdown(false);
   };
 
+  useEffect(() => {
+    const footer = document.querySelector("footer"); // your footer element
+    if (!footer) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setHideBar(entry.isIntersecting); // hide bar when footer is visible
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(footer);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  if (hideBar) return null; // completely hide VariantBar when footer is in view
+
   return (
-    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[95%] max-w-[1000px] z-50 pb-5">
-      <div className="bg-white rounded-xl shadow-[0_2px_20px_rgba(0,0,0,0.25)] h-18 flex items-center px-6 font-blunt font-medium text-gray-800 overflow-hidden ">
+    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[95%] max-w-[1000px] z-[9999] pb-5">
+      <div className="bg-white rounded-xl shadow-[0_2px_20px_rgba(0,0,0,0.25)] h-18 flex items-center px-6 font-blunt font-medium text-gray-800 overflow-hidden">
+        {/* Title */}
         <div className="flex-shrink-0 mr-8">
           <h6 className="text-lg sm:text-xl md:text-2xl">{title}</h6>
         </div>
 
+        {/* Variants */}
         <div className="flex items-center overflow-x-auto flex-1 relative">
           {variants.slice(0, 1).map((variant) => (
             <div
@@ -41,7 +66,7 @@ const VariantBar: React.FC<VariantBarProps> = ({ title, variants }) => {
               onClick={toggleDropdown}
             >
               <span
-                className={`w-8 h-8 rounded-full border align-center justify-center items-center ${
+                className={`w-8 h-8 rounded-full border flex-shrink-0 ${
                   activeVariant.id === variant.id
                     ? "border-gray-800"
                     : "border-gray-300"
@@ -53,31 +78,12 @@ const VariantBar: React.FC<VariantBarProps> = ({ title, variants }) => {
                 <label className="text-sm sm:text-base md:text-lg font-semibold">
                   {variant.label}
                 </label>
-
-                <div className="flex items-center mt-1">
-                  {/* <svg
-                    className="w-3 h-3"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 12 7"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M1 1.5L5.29289 5.79289C5.68342 6.18342 6.31658 6.18342 6.70711 5.79289L11 1.5"
-                      stroke="#262525"
-                      strokeWidth="1.5"
-                    />
-                  </svg>
-                  <span className="ml-1 text-xs text-gray-600">
-                    +{variants.length - 1} Colors
-                  </span> */}
-                </div>
               </div>
             </div>
           ))}
 
           {showDropdown && (
-            <div className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-lg py-2 z-50 w-60 max-h-64 overflow-y-auto">
+            <div className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-lg py-2 z-[10000] w-60 max-h-64 overflow-y-auto">
               {variants.map((variant) => (
                 <div
                   key={variant.id}
@@ -98,6 +104,7 @@ const VariantBar: React.FC<VariantBarProps> = ({ title, variants }) => {
           )}
         </div>
 
+        {/* Add to Bag Button */}
         <div className="flex-shrink-0 ml-6">
           {activeVariant.inStock ? (
             <button className="bg-black text-white px-6 py-3 rounded-sm text-base sm:text-lg font-semibold hover:bg-gray-800 transition w-72 flex justify-between items-center">

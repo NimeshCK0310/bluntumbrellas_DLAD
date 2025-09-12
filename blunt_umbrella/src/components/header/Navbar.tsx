@@ -152,7 +152,7 @@ function Navbar({ isDark }: { isDark: boolean }) {
                 </div>
                 <div className="my-2">
                   <Button buttonText={"Learn More"} />
-                </div>
+               </div>
               </div>
             </div>
           </div>

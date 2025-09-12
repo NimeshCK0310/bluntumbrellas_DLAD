@@ -6,6 +6,7 @@ import CollaborationSection from "../CollaborationSection";
 import OurProductSection from "../OurProductSection";
 import BottomSection from "../BottomSection";
 import VariantBar from "../VariantBar";
+import Footer from "../Footer";
 
 const variants = [
   {
@@ -27,6 +28,7 @@ function Sustainability() {
       <CollaborationSection />
       <OurProductSection />
       <BottomSection />
+      <Footer />
 
       <VariantBar title="Classic" variants={variants} />
     </div>
