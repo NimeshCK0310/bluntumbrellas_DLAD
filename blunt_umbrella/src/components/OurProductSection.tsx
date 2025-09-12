@@ -93,8 +93,8 @@ const OurProductsSection = () => {
                 </div>
 
                 <div className="flex justify-center pb-6 bg-[#f5f5f5]">
-                  <button className="bg-white text-sm font-medium text-[#1a1a1a] w-[520px] h-[35px] rounded-lg transition-all duration-500 group-hover:bg-black group-hover:text-white">
-                    Add the Bag
+                  <button className="bg-white text-sm font-medium text-[#1a1a1a] w-[520px] h-[55px] rounded-lg transition-all duration-500 group-hover:bg-black group-hover:text-white">
+                    Add to Bag
                   </button>
                 </div>
               </div>
